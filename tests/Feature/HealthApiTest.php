@@ -11,6 +11,20 @@ use Zzktz\LaravelHealth\Tests\TestCase;
 
 class HealthApiTest extends TestCase
 {
+    public function testPublishedConfigDefaultsToPrimaryMysqlAndDefaultRedisChecks(): void
+    {
+        $defaults = require __DIR__ . '/../../config/health.php';
+
+        $this->assertSame([
+            'mysql' => [
+                ['name' => 'primary', 'connection' => 'mysql', 'required' => true],
+            ],
+            'redis' => [
+                ['name' => 'default', 'connection' => 'default', 'required' => true],
+            ],
+        ], $defaults['checks']);
+    }
+
     public function testLiveEndpointDoesNotRequireBusinessDependencies(): void
     {
         $checker = Mockery::mock(HealthDependencyChecker::class);

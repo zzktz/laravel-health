@@ -7,7 +7,11 @@ return [
     'timeout_ms' => (int) env('HEALTH_TIMEOUT_MS', 4000),
     'middleware' => [],
     'checks' => [
-        'mysql' => [],
-        'redis' => [],
+        'mysql' => [
+            ['name' => 'primary', 'connection' => 'mysql', 'required' => true],
+        ],
+        'redis' => [
+            ['name' => 'default', 'connection' => 'default', 'required' => true],
+        ],
     ],
 ];

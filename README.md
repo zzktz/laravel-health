@@ -19,7 +19,7 @@ HEALTH_TIMEOUT_MS=4000
 
 `HEALTH_SERVICE_NAME` 只能包含英文字母、数字、点、下划线和短横线，长度为 1–100 个字符。
 
-默认依赖清单为空，确保安装包不会因为项目没有 MySQL 或 Redis 就绪检查配置而误报故障。请只把确实属于就绪条件的连接加入清单：
+默认会检查必需的 MySQL `mysql` 连接和 Redis `default` 连接。若项目不使用其中某项，或希望更改连接名/必需性，请在发布的 `config/health.php` 中调整检查清单：
 
 ```php
 'checks' => [
